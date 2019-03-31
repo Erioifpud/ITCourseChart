@@ -22,7 +22,10 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Production'
+      title: 'Production',
+      meta: {
+        'Content-Security-Policy': { 'http-equiv': 'Content-Security-Policy', 'content': 'upgrade-insecure-requests' },
+      }
     })
   ],
   output: {

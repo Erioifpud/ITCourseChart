@@ -18,6 +18,7 @@
   },
   "scripts": {
     "build": "webpack --config webpack.prod.js",
-    "serve": "webpack-dev-server --port 10010 --config webpack.dev.js"
+    "serve": "webpack-dev-server --port 10010 --config webpack.dev.js",
+    "now-build": "webpack --config webpack.prod.js"
   }
 }

@@ -39,7 +39,8 @@ function getNewPoints () {
       }
       let index = 0
       if (streamName) {
-        index = datastreams.findIndex(item => item.id === streamName)
+        const newIndex = datastreams.findIndex(item => item.id === streamName)
+        index = newIndex === -1 ? 0 : newIndex
       }
       const datapoints = datastreams[index].datapoints
       const mappedPoints = datapoints.map(({ at, value }) => ({

@@ -23,7 +23,7 @@ function getNewPoints () {
     return
   }
   const params = hash.slice(1, hash.length)
-  const [id, key] = params.split(',')
+  const [id, key, streamName] = params.split(',')
   var api = new OneNetApi(key)
   const promise = new Promise((resolve, reject) => {
     api.getDataPoints(id, { limit: '10' }).done(async (resp) => {
@@ -37,7 +37,11 @@ function getNewPoints () {
       if (datastreams.length === 0) {
         reject('数据流不能为空')
       }
-      const datapoints = datastreams[0].datapoints
+      let index = 0
+      if (streamName) {
+        index = datastreams.findIndex(item => item.id === streamName)
+      }
+      const datapoints = datastreams[index].datapoints
       const mappedPoints = datapoints.map(({ at, value }) => ({
         name: `${at}${value}`,
         value: [at, value]
@@ -63,7 +67,7 @@ function initTimer (chartInstance) {
       })
     } catch (err) {
       clearInterval(timer)
-      window.alert(err)
+      // window.alert(err)
     }
   }, 3000)
 }
